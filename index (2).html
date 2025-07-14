@@ -1,0 +1,135 @@
+<script type="text/javascript">
+        var gk_isXlsx = false;
+        var gk_xlsxFileLookup = {};
+        var gk_fileData = {};
+        function filledCell(cell) {
+          return cell !== '' && cell != null;
+        }
+        function loadFileData(filename) {
+        if (gk_isXlsx && gk_xlsxFileLookup[filename]) {
+            try {
+                var workbook = XLSX.read(gk_fileData[filename], { type: 'base64' });
+                var firstSheetName = workbook.SheetNames[0];
+                var worksheet = workbook.Sheets[firstSheetName];
+
+                // Convert sheet to JSON to filter blank rows
+                var jsonData = XLSX.utils.sheet_to_json(worksheet, { header: 1, blankrows: false, defval: '' });
+                // Filter out blank rows (rows where all cells are empty, null, or undefined)
+                var filteredData = jsonData.filter(row => row.some(filledCell));
+
+                // Heuristic to find the header row by ignoring rows with fewer filled cells than the next row
+                var headerRowIndex = filteredData.findIndex((row, index) =>
+                  row.filter(filledCell).length >= filteredData[index + 1]?.filter(filledCell).length
+                );
+                // Fallback
+                if (headerRowIndex === -1 || headerRowIndex > 25) {
+                  headerRowIndex = 0;
+                }
+
+                // Convert filtered JSON back to CSV
+                var csv = XLSX.utils.aoa_to_sheet(filteredData.slice(headerRowIndex)); // Create a new sheet from filtered array of arrays
+                csv = XLSX.utils.sheet_to_csv(csv, { header: 1 });
+                return csv;
+            } catch (e) {
+                console.error(e);
+                return "";
+            }
+        }
+        return gk_fileData[filename] || "";
+        }
+        </script><!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>r U reTArDed</title>
+  <script src="https://cdn.tailwindcss.com"></script>
+  <style>
+    @import url('https://fonts.googleapis.com/css2?family=Poppins:wght@400;600;700&display=swap');
+    body { font-family: 'Poppins', sans-serif; }
+    .btn { transition: transform 0.2s, background-color 0.3s; }
+    .btn:hover { transform: scale(1.05); }
+    .result-overlay { animation: fadeIn 0.5s ease-in; }
+    @keyframes fadeIn { from { opacity: 0; } to { opacity: 1; } }
+  </style>
+</head>
+<body class="bg-gradient-to-br from-blue-900 via-purple-900 to-blue-800 text-white flex flex-col items-center justify-center min-h-screen">
+  <div class="container mx-auto p-6 max-w-lg bg-gray-800 bg-opacity-80 rounded-2xl shadow-2xl">
+    <h1 class="text-5xl font-bold text-center text-yellow-400 mb-4">r U reTArDed?</h1>
+    <p class="text-center text-gray-300 mb-6 text-lg">Snap a selfie or upload a pic for a *totally legit* diagnosis! 😎</p>
+
+    <div class="mb-8 flex flex-col gap-4">
+      <input type="file" id="imageInput" accept="image/*" capture="user" class="hidden">
+      <button id="takeSelfie" class="btn bg-blue-600 hover:bg-blue-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md">📸 Take a Selfie</button>
+      <button id="uploadImage" class="btn bg-purple-600 hover:bg-purple-700 text-white font-semibold py-3 px-6 rounded-lg shadow-md">🖼️ Upload from Gallery</button>
+    </div>
+
+    <div id="imageContainer" class="relative hidden">
+      <img id="selfie" class="w-full rounded-xl shadow-lg border-4 border-gray-700">
+      <div id="resultOverlay" class="result-overlay absolute inset-0 flex flex-col items-center justify-center bg-black bg-opacity-60 rounded-xl">
+        <p id="resultText" class="text-4xl font-bold text-yellow-400 drop-shadow-lg"></p>
+        <p id="percentage" class="text-2xl font-semibold text-white drop-shadow-lg"></p>
+      </div>
+    </div>
+  </div>
+
+  <script>
+    const responses = [
+      "Yup, you're a full-on window licker! 🤤",
+      "Brain's running on dial-up, huh? 🐢",
+      "Not retarded, just painfully average! 😬",
+      "Your IQ's in the single digits, champ! 😵",
+      "You're the poster child for dumbassery! 🏆",
+      "Congrats, you make rocks look smart! 🪨",
+      "You're not retarded... said no one ever! 😈",
+      "Brain cells: Out of service! 📴",
+      "You're a walking argument for natural selection! 💀",
+      "Not the sharpest crayon in the box, eh? 🖍️",
+      "Your head's just a decorative piece! 🎃",
+      "You make a brick wall seem gifted! 🧱",
+      "Retardation level: Expert mode unlocked! 🎮",
+      "You're proof evolution can backfire! 🦧",
+      "Brain's on strike, or just unemployed? 🤷"
+    ];
+
+    const imageInput = document.getElementById('imageInput');
+    const takeSelfie = document.getElementById('takeSelfie');
+    const uploadImage = document.getElementById('uploadImage');
+    const imageContainer = document.getElementById('imageContainer');
+    const selfie = document.getElementById('selfie');
+    const resultOverlay = document.getElementById('resultOverlay');
+    const resultText = document.getElementById('resultText');
+    const percentage = document.getElementById('percentage');
+
+    // Trigger file input for selfie
+    takeSelfie.addEventListener('click', () => {
+      imageInput.setAttribute('capture', 'user');
+      imageInput.click();
+    });
+
+    // Trigger file input for gallery
+    uploadImage.addEventListener('click', () => {
+      imageInput.removeAttribute('capture');
+      imageInput.click();
+    });
+
+    // Handle image selection
+    imageInput.addEventListener('change', (e) => {
+      if (e.target.files && e.target.files[0]) {
+        const reader = new FileReader();
+        reader.onload = (event) => {
+          selfie.src = event.target.result;
+          imageContainer.classList.remove('hidden');
+          
+          // Generate random result
+          const randomIndex = Math.floor(Math.random() * responses.length);
+          const randomPercentage = Math.floor(Math.random() * 100) + 1;
+          resultText.textContent = responses[randomIndex];
+          percentage.textContent = `${randomPercentage}% Retardation`;
+        };
+        reader.readAsDataURL(e.target.files[0]);
+      }
+    });
+  </script>
+</body>
+</html>
