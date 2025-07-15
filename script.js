@@ -2,13 +2,42 @@
 const responses = [
     "Wow, you're so retarded you make rocks look smart.",
     "Retard alert: Your brain's on permanent vacation, dummy.",
-    // ... Add all 30 here ...
+    "You're not just retarded, you're the king of idiots.",
+    "Congrats, retard—your IQ is lower than your shoe size.",
+    "Retarded beyond belief. Go back to drooling in the corner.",
+    "You're so retarded, even retards think you're retarded.",
+    "Brain scan complete: Total retard detected. Seek help, loser.",
+    "Retard levels off the charts—you're a human error.",
+    "Dummy confirmed. Retarded beyond repair.",
+    "You're retarded enough to fail at being retarded.",
+    "Retard vibes strong—your face says it all, moron.",
+    "Scan results: Pure retard. Don't breed, please.",
+    "You're so retarded, Darwin would disown you.",
+    "Retard-o-meter broken from your stupidity.",
+    "Confirmed retard. Your mom's worst mistake.",
+    "Retarded and ugly—double whammy, clown.",
+    "Brain not found. Retard status: Elite.",
+    "You're retarded like a fox... wait, no, just retarded.",
+    "Retard central: Population—you, fool.",
+    "Scan says: Retarded nitwit. Good luck with that.",
+    "You're so retarded, you think this app is real.",
+    "Retard achievement unlocked: Maximum dumb.",
+    "Holy retard, Batman! You're the sidekick nobody wants.",
+    "Retarded and proud? Nah, just retarded.",
+    "Your retardation is contagious—stay away, idiot.",
+    "Scan complete: Retard overload. System crashing.",
+    "You're retarded enough to need therapy after this.",
+    "Retard royalty: Bow to the dumb king.",
+    "Confirmed: Retarded clown. Circus called, they want you back.",
     "Retard levels critical—evacuate your brain, if it exists."
 ];
 
 const specialMessages = [
     "Omega levels of retardation achieved—you're a legend in stupidity.",
-    // ... Add the rest ...
+    "Over 100% retard: You're breaking the scale, you absolute failure.",
+    "Hyper-retard mode: Even aliens think you're dumb.",
+    "Ultimate retard status: You've reached peak idiot—congrats, loser.",
+    "Retard overload: Your brain is a black hole of dumbness."
 ];
 
 const negativeMessage = "Not retarded... surprisingly. Don't let it go to your head, genius.";
@@ -109,16 +138,49 @@ function generateResults() {
             message = responses[Math.floor(Math.random() * responses.length)];
         }
         
-        // Overlay text
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.5)';
-        ctx.fillRect(0, img.height - 100, img.width, 100);
+        // Prominent overlay: Larger semi-transparent box at bottom
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)'; // Darker for better contrast
+        ctx.fillRect(0, img.height - 200, img.width, 200); // Taller box
+        
+        // Center text
+        ctx.textAlign = 'center';
+        ctx.shadowColor = 'black'; // Shadow for "loud" effect
+        ctx.shadowBlur = 5;
+        
+        // Large percentage text
+        ctx.fillStyle = '#ff0000'; // Red for emphasis
+        ctx.font = 'bold 48px Arial';
+        ctx.fillText(`${Math.round(percent)}% Retarded`, img.width / 2, img.height - 130);
+        
+        // Message text (split if too long for wrapping)
         ctx.fillStyle = '#fff';
-        ctx.font = 'bold 24px Arial';
-        ctx.fillText(`${Math.round(percent)}% Retarded`, 20, img.height - 60);
-        ctx.font = '18px Arial';
-        ctx.fillText(message, 20, img.height - 30);
+        ctx.font = 'bold 32px Arial';
+        const maxWidth = img.width - 40; // Padding
+        const lines = wrapText(ctx, message, maxWidth);
+        lines.forEach((line, index) => {
+            ctx.fillText(line, img.width / 2, img.height - 80 + (index * 40));
+        });
     };
     img.src = currentImage;
+}
+
+// Helper function to wrap long messages
+function wrapText(ctx, text, maxWidth) {
+    const words = text.split(' ');
+    const lines = [];
+    let currentLine = words[0];
+    for (let i = 1; i < words.length; i++) {
+        const testLine = currentLine + ' ' + words[i];
+        const metrics = ctx.measureText(testLine);
+        if (metrics.width > maxWidth) {
+            lines.push(currentLine);
+            currentLine = words[i];
+        } else {
+            currentLine = testLine;
+        }
+    }
+    lines.push(currentLine);
+    return lines;
 }
 
 // Share Button (downloads the image)
