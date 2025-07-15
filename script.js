@@ -1,46 +1,72 @@
-// Updated witty responses (crude, relaxed snippets with mental disability theme, emojis allowed)
-const responses = [
-    "Yup, full-on window licker 🪟👅",
-    "Your head's just a decorative piece, retard 🎩😵",
-    "Classic helmet kid energy 🪖🤪",
-    "Retard mode: Drool champion 👑💧",
-    "So retarded, thoughts need training wheels 🚲🧠",
-    "You're the short bus VIP 🚌⭐",
-    "Mentally parked in disabled spot ♿🧠",
-    "Brain's on strike, retard picket line 🚧😑",
-    "Dummy alert: Crayon eater certified 🖍️🍴",
-    "Retarded like a puzzle missing half the pieces 🧩❓",
-    "Vibes: Special ed hall of famer 🏆🏫",
-    "Pure retard, extra slow sauce 🐌🍝",
-    "Your smarts? Permanent vacation mode 🏖️🧠",
-    "Retard meter maxed, helmet required 🪖📈",
-    "Confirmed: Mom's favorite oops baby 👶🙄",
-    "Retarded and awkward—like a bad date with yourself 😬🧠",
-    "Brain not loading... retard error 404 🚫🧠",
-    "You're the retard who hugs trees 'cause they're family 🌳🤗",
-    "Retard central: Echoes in an empty skull 💀🗣️",
-    "Nitwit retard: Counts to potato 🥔🔢",
-    "So retarded, echoes in your head have echoes 🔊🧠",
-    "Retard upgrade: Now with bonus blank stares 👀😶",
-    "Holy retard: Praying for a brain transplant 🙏🧠",
-    "Retarded glow? More like dim bulb 💡😵",
-    "Contagious retard: Friends catching the slow 🐢👥",
-    "Overload: Retard circuits popping popcorn 🍿🧠",
-    "Retarded therapy? Start with velcro shoes 👟🔒",
-    "Royal retard: Crown of foam padding 👑🛡️",
-    "Clown retard: Red nose optional 🤡👃",
-    "Critical retard: Brain nap eternal 😴🧠"
+// Tiered responses: Mild for low %, harsher as % increases, mix of one-liners, looks insults, and funny retard jokes
+const mildResponses = [ // Under 30%: Mostly positive, light mix (10 responses)
+    "Barely retarded... your face almost fools us all 😏",
+    "Low retard: Cute try at looking sharp, almost worked 👀",
+    "Mild case: Face says 'I'm trying,' brain agrees 🧐",
+    "Under radar retard: Your look's not giving it away yet 😌",
+    "Slight retard: Helmet optional for that mug 🪖😉",
+    "Not bad: You're the retard who blends in at parties 🎉",
+    "Light retard: Brain's slow, but face is on point 📸",
+    "Barely there: Like a retard in disguise 🕶️",
+    "Mild vibes: Your grin hides the slow burn 😬",
+    "Low score: Face like a normie, inside's the joke 🤫"
 ];
 
-const specialMessages = [
-    "Omega retard: Window-licking legend 👅🪟🏆",
-    "Over 100%: Head decoration hall of fame 🎩😵⭐",
-    "Hyper-retard: Helmet hero eternal 🪖🦸‍♂️",
-    "Ultimate retard: Drool dynasty founder 💧👑",
-    "Retard max: Short bus overlord 🚌👹"
+const mediumResponses = [ // 30-70%: Moderate crude, balanced mix (20 responses)
+    "Mid retard: Face like a puzzled potato 🥔😵",
+    "Decent retard: Your look's got that vacant charm 👀✨",
+    "Retard rising: Mug drooping like your thoughts 📉🧠",
+    "Half retard: Short bus selfie material 🚌🤳",
+    "Medium slow: Face begging for a helmet fitting 🪖🙄",
+    "Retard joke: You're the one who licks windows casually 🪟👅",
+    "Balanced retard: Brain and face in slow sync 😑",
+    "Mid-level: Like a retard at a genius convention 🧠🎪",
+    "Retard tease: Your stare's blanker than a fresh slate 👀❌",
+    "Funny retard: Thinks puzzles are for eating 🧩🍴",
+    "Medium mug: Looks retarded, acts surprised 😲",
+    "Retard zing: Slow as molasses in January 🐌",
+    "Halfway fool: Face tells the retard story 📖😵",
+    "Moderate joke: Retard who counts fingers twice 🔢🖐️",
+    "Retard blend: Ugly slow with a side of awkward 😬",
+    "Mid scan: Brain's buffering, face loading error 🚫",
+    "Retard fun: Hugs the wrong tree in the forest 🌳🤗",
+    "Medium clown: Retard juggling one thought 🤹‍♂️",
+    "Slow roast: Your look's the punchline 😅",
+    "Retard mix: Face and brain in retard harmony 🎶"
 ];
 
-const negativeMessage = "Not retarded... but close call 😏";
+const harshResponses = [ // 71-99%: Harsh, crude mix with more looks/funny jabs (20 responses)
+    "High retard: Face screams short bus regular 🚌😑",
+    "Serious retard: Drool-ready mug on display 💧👅",
+    "Retard max: Ugly like a retard convention reject 😵",
+    "Deep retard: Looks lost a bet with stupid 🥊🧠",
+    "Total retard: Face and brain in full drool mode 👑💧",
+    "Harsh joke: Retard who eats crayons for breakfast 🖍️🍳",
+    "Peak retard: Mug's the helmet model poster 🪖📸",
+    "Retard roast: Your stare's emptier than promises 👀🚫",
+    "Funny harsh: Counts to potato and calls it math 🥔🔢",
+    "Retard slam: Face like it needs training wheels 🚲😬",
+    "Crude retard: Window licker with a view 🪟👅",
+    "Harsh vibes: Brain nap, face eternal blank 😴😶",
+    "Retard zinger: Hugs trees 'cause people run 🌳🏃",
+    "Ugly retard: Looks match the mental mess 😵🎭",
+    "Severe joke: Retard upgrading to velcro life 👟🔒",
+    "Retard crown: Foam padding royalty 👑🛡️",
+    "Harsh clown: Red nose from retard blunders 🤡👃",
+    "Brain eternal nap: Face tells the sleepy tale 😴🧠",
+    "Retard overload: Popcorn thoughts exploding 🍿😵",
+    "Final jab: Retard therapy starts with basics 📚🤪"
+];
+
+const specialMessages = [ // >100%: Over-the-top harsh mix (5 responses)
+    "Omega retard: Window-licking hall of fame 👅🪟🏆",
+    "Over 100%: Head just for hat storage 🎩😵⭐",
+    "Hyper-retard: Eternal helmet icon 🪖🦸‍♂️",
+    "Ultimate retard: Drool empire builder 💧👑",
+    "Retard max: Short bus supreme ruler 🚌👹"
+];
+
+const negativeMessage = "Not retarded... face had us fooled 😎";
 
 // Elements (unchanged)
 const takeSelfieBtn = document.getElementById('take-selfie');
@@ -138,7 +164,7 @@ scanBtn.addEventListener('click', () => {
     }, 3000);
 });
 
-// Generate Results (50% smaller text sizes from previous halved version, now 47px message, 47px measurement, 47px percentage? Wait, halved from last: percentage 47px, message 28.5~29px, but adjust to sensible)
+// Generate Results (unchanged text sizes)
 function generateResults() {
     const ctx = resultCanvas.getContext('2d');
     const img = new Image();
@@ -147,20 +173,27 @@ function generateResults() {
         resultCanvas.height = img.height;
         ctx.drawImage(img, 0, 0);
         
-        const percent = Math.random() * 150;
+        const percentValue = Math.random() * 150;
+        const percent = Math.round(percentValue);
         let message;
-        if (percent <= 20) {
-            message = negativeMessage;
-        } else if (percent > 100) {
-            message = specialMessages[Math.floor(Math.random() * specialMessages.length)];
+        if (percent <= 30) {
+            if (percent <= 20) {
+                message = negativeMessage;
+            } else {
+                message = mildResponses[Math.floor(Math.random() * mildResponses.length)];
+            }
+        } else if (percent <= 70) {
+            message = mediumResponses[Math.floor(Math.random() * mediumResponses.length)];
+        } else if (percent <= 100) {
+            message = harshResponses[Math.floor(Math.random() * harshResponses.length)];
         } else {
-            message = responses[Math.floor(Math.random() * responses.length)];
+            message = specialMessages[Math.floor(Math.random() * specialMessages.length)];
         }
         
-        ctx.font = 'bold 29px Arial'; // Halved from 57px
+        ctx.font = 'bold 29px Arial'; // Measurement font
         const maxWidth = img.width - 100;
         const lines = wrapText(ctx, message, maxWidth);
-        const boxHeight = 68 + (lines.length * 32); // Halved from 135 and 64
+        const boxHeight = 68 + (lines.length * 32);
         
         const boxY = (img.height / 2) - (boxHeight / 2);
         ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
@@ -171,13 +204,13 @@ function generateResults() {
         ctx.shadowBlur = 20;
         
         ctx.fillStyle = '#ff0000';
-        ctx.font = 'bold 47px Arial'; // Halved from 94px
-        ctx.fillText(`${Math.round(percent)}% RETARDED`, img.width / 2, boxY + 53); // Halved position
+        ctx.font = 'bold 47px Arial';
+        ctx.fillText(`${percent}% RETARDED`, img.width / 2, boxY + 53);
         
         ctx.fillStyle = '#fff';
         ctx.font = 'bold 29px Arial';
         lines.forEach((line, index) => {
-            ctx.fillText(line, img.width / 2, boxY + 90 + (index * 32)); // Halved position
+            ctx.fillText(line, img.width / 2, boxY + 90 + (index * 32));
         });
     };
     img.src = currentImage;
