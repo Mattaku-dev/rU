@@ -1,46 +1,46 @@
-// Updated cruder responses (slightly vulgar, no hard cuss words)
+// Updated roast-style responses (zingy one-liners, comedian roast feel)
 const responses = [
-    "Damn, you're retarded enough to trip over your own shadow, idiot.",
-    "Retard alert: Your brain's a damn empty void, helpless moron.",
-    "You're not just retarded, you're the damn emperor of boneheads.",
-    "Congrats, retard—your IQ's scraping the bottom of the barrel.",
-    "Retarded as hell. Crawl back to your cave, drooling fool.",
-    "You're so retarded, even village idiots pity you.",
-    "Brain scan: Total retard. Get a damn clue, loser.",
-    "Retard levels exploding—you're a walking disaster.",
-    "Moron confirmed. Retarded and utterly hopeless.",
-    "You're retarded enough to screw up breathing.",
-    "Retard vibes maxed—your face screams 'dumb as dirt'.",
-    "Scan results: Pure retard. Keep your genes to yourself.",
-    "You're so retarded, evolution's regretting you.",
-    "Retard-o-meter shattered by your sheer stupidity.",
-    "Confirmed retard. Your mom's biggest regret, damn it.",
-    "Retarded and hideous—double damn whammy, clown.",
-    "Brain missing in action. Retard status: Supreme.",
-    "You're retarded like a damn broken record.",
-    "Retard headquarters: Just you, you pitiful fool.",
-    "Scan says: Retarded dimwit. Tough break.",
-    "You're so retarded, you believe your own nonsense.",
-    "Retard milestone: Peak stupidity unlocked.",
-    "Holy retard! You're the damn reject nobody claims.",
-    "Retarded and smug? Nah, just plain retarded.",
-    "Your retardation's spreading—quarantine yourself, idiot.",
-    "Scan complete: Retard crisis. Systems failing.",
-    "You're retarded enough to damn near need a handler.",
-    "Retard elite: Hail the king of dimwits.",
-    "Confirmed: Retarded buffoon. The circus misses you.",
-    "Retard levels extreme—abandon all hope for brains."
+    "You're so retarded, you tried to drown a fish.",
+    "Retard level: You think Taco Bell is a Mexican phone company.",
+    "You're retarded like a screen door on a submarine.",
+    "Congrats, retard—you're the reason shampoo has instructions.",
+    "You're so retarded, you tripped over a cordless phone.",
+    "Retard alert: You stare at orange juice because it says 'concentrate'.",
+    "You're retarded enough to get lost in an elevator.",
+    "Brain scan: Retard who brings a spoon to the Super Bowl.",
+    "You're so retarded, you think a quarterback is a refund.",
+    "Retard vibes: You climb over a glass wall to see what's on the other side.",
+    "You're retarded like putting a 'Do Not Walk on Grass' sign on a fence.",
+    "Scan results: Retard who takes a ruler to bed to see how long you sleep.",
+    "You're so retarded, you think Meow Mix is a CD for cats.",
+    "Retard-o-meter: You return a doughnut because it has a hole.",
+    "Confirmed retard: You think Earth Day is when the planet gets older.",
+    "You're retarded and ugly—like a two-for-one special on fails.",
+    "Brain not found: Retard who locks the car and leaves the keys inside.",
+    "You're retarded like arguing with a signpost.",
+    "Retard central: You bring your own pencil to a blood test.",
+    "Scan says: Retard who thinks manual labor is a Spanish musician.",
+    "You're so retarded, you think cheerios are doughnut seeds.",
+    "Retard unlocked: You take the 'The' out of 'psychotherapist'.",
+    "Holy retard: You think a solar eclipse is the sun quitting.",
+    "Retarded and proud? Like a peacock with no feathers.",
+    "Your retardation: Like bringing a fork to a soup convention.",
+    "Scan complete: Retard who waves at blind people.",
+    "You're retarded enough to need a map for the shower.",
+    "Retard royalty: Crown made of tin foil.",
+    "Confirmed clown: Retard who laughs at mirrors.",
+    "Retard critical: You think fast food is hard to catch."
 ];
 
 const specialMessages = [
-    "Omega retardation: You're a damn legend in moron history.",
-    "Over 100% retard: Shattering scales, you utter failure.",
-    "Hyper-retard: Aliens laugh at your damn stupidity.",
-    "Ultimate retard: Peak idiot achieved—pathetic, loser.",
-    "Retard apocalypse: Your brain's a damn wasteland."
+    "Omega retard: You're the punchline evolution forgot.",
+    "Over 100%: Retard so epic, even mirrors crack up.",
+    "Hyper-retard: Aliens visit just to point and laugh.",
+    "Ultimate retard: Peak moron—deserves a damn trophy.",
+    "Retard overload: Your brain's on strike, permanently."
 ];
 
-const negativeMessage = "Not retarded... shockingly. Don't get cocky, smartass.";
+const negativeMessage = "Not retarded... but give it time, genius.";
 
 // Elements (unchanged)
 const takeSelfieBtn = document.getElementById('take-selfie');
@@ -117,7 +117,7 @@ scanBtn.addEventListener('click', () => {
     }, 3000);
 });
 
-// Generate Results (25% larger text, centered)
+// Generate Results (50% larger text)
 function generateResults() {
     const ctx = resultCanvas.getContext('2d');
     const img = new Image();
@@ -136,10 +136,10 @@ function generateResults() {
             message = responses[Math.floor(Math.random() * responses.length)];
         }
         
-        ctx.font = 'bold 75px Arial'; // Temp for measurement (25% up from 60px)
+        ctx.font = 'bold 113px Arial'; // Temp for measurement (50% up from 75px)
         const maxWidth = img.width - 100;
         const lines = wrapText(ctx, message, maxWidth);
-        const boxHeight = 180 + (lines.length * 85); // Adjusted for larger text
+        const boxHeight = 270 + (lines.length * 128); // Adjusted for larger text (50% up)
         
         const boxY = (img.height / 2) - (boxHeight / 2);
         ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
@@ -150,13 +150,13 @@ function generateResults() {
         ctx.shadowBlur = 20;
         
         ctx.fillStyle = '#ff0000';
-        ctx.font = 'bold 125px Arial'; // 25% up from 100px
-        ctx.fillText(`${Math.round(percent)}% RETARDED`, img.width / 2, boxY + 140);
+        ctx.font = 'bold 188px Arial'; // 50% up from 125px
+        ctx.fillText(`${Math.round(percent)}% RETARDED`, img.width / 2, boxY + 210);
         
         ctx.fillStyle = '#fff';
-        ctx.font = 'bold 75px Arial';
+        ctx.font = 'bold 113px Arial';
         lines.forEach((line, index) => {
-            ctx.fillText(line, img.width / 2, boxY + 240 + (index * 85));
+            ctx.fillText(line, img.width / 2, boxY + 360 + (index * 128));
         });
     };
     img.src = currentImage;
