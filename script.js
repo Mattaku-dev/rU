@@ -1,12 +1,12 @@
 // Responses arrays (from previous designs)
 const responses = [
-    "Wow, you're so retarded you make rocks look smart.",
+    "Wow, you're definitely retarded..",
     "Retard alert: Your brain's on permanent vacation, dummy.",
     "You're not just retarded, you're the king of idiots.",
     "Congrats, retard—your IQ is lower than your shoe size.",
     "Retarded beyond belief. Go back to drooling in the corner.",
     "You're so retarded, even retards think you're retarded.",
-    "Brain scan complete: Total retard detected. Seek help, loser.",
+    "Brain scan complete: Total retard detected. Seek help.",
     "Retard levels off the charts—you're a human error.",
     "Dummy confirmed. Retarded beyond repair.",
     "You're retarded enough to fail at being retarded.",
@@ -139,31 +139,31 @@ function generateResults() {
         }
         
         // Calculate dynamic box height for centering
-        ctx.font = 'bold 50px Arial'; // Temp for measurement
+        ctx.font = 'bold 60px Arial'; // Temp for measurement
         const maxWidth = img.width - 100; // Padding
         const lines = wrapText(ctx, message, maxWidth);
-        const boxHeight = 120 + (lines.length * 60); // Base for percentage + message lines
+        const boxHeight = 150 + (lines.length * 70); // Larger base for bigger text
         
         // Centered overlay box
         const boxY = (img.height / 2) - (boxHeight / 2);
         ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
-        ctx.fillRect(20, boxY, img.width - 40, boxHeight); // Slight horizontal padding
+        ctx.fillRect(20, boxY, img.width - 40, boxHeight); // Horizontal padding
         
         // Center text
         ctx.textAlign = 'center';
         ctx.shadowColor = 'black';
-        ctx.shadowBlur = 15;
+        ctx.shadowBlur = 20;
         
-        // Large percentage text
+        // Extra large percentage text
         ctx.fillStyle = '#ff0000';
-        ctx.font = 'bold 80px Arial';
-        ctx.fillText(`${Math.round(percent)}% RETARDED`, img.width / 2, boxY + 90);
+        ctx.font = 'bold 100px Arial';
+        ctx.fillText(`${Math.round(percent)}% RETARDED`, img.width / 2, boxY + 120);
         
-        // Message text
+        // Large message text
         ctx.fillStyle = '#fff';
-        ctx.font = 'bold 50px Arial';
+        ctx.font = 'bold 60px Arial';
         lines.forEach((line, index) => {
-            ctx.fillText(line, img.width / 2, boxY + 160 + (index * 60));
+            ctx.fillText(line, img.width / 2, boxY + 200 + (index * 70));
         });
     };
     img.src = currentImage;
