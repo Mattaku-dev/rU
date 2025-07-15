@@ -15,11 +15,11 @@ const responses = [
     "Your smarts? Permanent vacation mode 🏖️🧠",
     "Retard meter maxed, helmet required 🪖📈",
     "Confirmed: Mom's favorite oops baby 👶🙄",
-    "Retarded and goofy—like a lopsided grin 😬🧠",
+    "Retarded and awkward—like a bad date with yourself 😬🧠",
     "Brain not loading... retard error 404 🚫🧠",
     "You're the retard who hugs trees 'cause they're family 🌳🤗",
     "Retard central: Echoes in an empty skull 💀🗣️",
-    "Nitwit retard: Counts sheep to fall awake 🐑😴",
+    "Nitwit retard: Counts to potato 🥔🔢",
     "So retarded, echoes in your head have echoes 🔊🧠",
     "Retard upgrade: Now with bonus blank stares 👀😶",
     "Holy retard: Praying for a brain transplant 🙏🧠",
@@ -59,20 +59,40 @@ const resultCanvas = document.getElementById('result-canvas');
 
 let currentImage = null;
 
-// Take Selfie (unchanged)
+// Function to resize image to consistent size (fix for selfie vs gallery scaling)
+function resizeImage(dataUrl, maxWidth = 800) {
+    return new Promise((resolve) => {
+        const img = new Image();
+        img.onload = () => {
+            const aspectRatio = img.height / img.width;
+            const newWidth = Math.min(img.width, maxWidth);
+            const newHeight = newWidth * aspectRatio;
+            const tempCanvas = document.createElement('canvas');
+            tempCanvas.width = newWidth;
+            tempCanvas.height = newHeight;
+            const tempCtx = tempCanvas.getContext('2d');
+            tempCtx.drawImage(img, 0, 0, newWidth, newHeight);
+            resolve(tempCanvas.toDataURL('image/png'));
+        };
+        img.src = dataUrl;
+    });
+}
+
+// Take Selfie (with resize)
 takeSelfieBtn.addEventListener('click', async () => {
     try {
-        const stream = await navigator.mediaDevices.getUserMedia({ video: true });
+        const stream = await navigator.mediaDevices.getUserMedia({ video: { facingMode: 'user' } });
         video.srcObject = stream;
         video.classList.remove('hidden');
         inputSection.classList.add('hidden');
         previewSection.classList.remove('hidden');
         
-        setTimeout(() => {
+        setTimeout(async () => {
             canvas.width = video.videoWidth;
             canvas.height = video.videoHeight;
             canvas.getContext('2d').drawImage(video, 0, 0);
-            currentImage = canvas.toDataURL('image/png');
+            let tempImage = canvas.toDataURL('image/png');
+            currentImage = await resizeImage(tempImage);
             preview.src = currentImage;
             video.classList.add('hidden');
             preview.classList.remove('hidden');
@@ -84,16 +104,17 @@ takeSelfieBtn.addEventListener('click', async () => {
     }
 });
 
-// Upload Image (unchanged)
+// Upload Image (with resize)
 uploadBtn.addEventListener('click', () => {
     const input = document.createElement('input');
     input.type = 'file';
     input.accept = 'image/*';
-    input.onchange = (e) => {
+    input.onchange = async (e) => {
         const file = e.target.files[0];
         const reader = new FileReader();
-        reader.onload = (event) => {
-            currentImage = event.target.result;
+        reader.onload = async (event) => {
+            let tempImage = event.target.result;
+            currentImage = await resizeImage(tempImage);
             preview.src = currentImage;
             inputSection.classList.add('hidden');
             previewSection.classList.remove('hidden');
@@ -117,7 +138,7 @@ scanBtn.addEventListener('click', () => {
     }, 3000);
 });
 
-// Generate Results (unchanged from previous size)
+// Generate Results (unchanged)
 function generateResults() {
     const ctx = resultCanvas.getContext('2d');
     const img = new Image();
