@@ -138,27 +138,32 @@ function generateResults() {
             message = responses[Math.floor(Math.random() * responses.length)];
         }
         
-        // Prominent overlay: Larger semi-transparent box at bottom
-        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)'; // Darker for better contrast
-        ctx.fillRect(0, img.height - 200, img.width, 200); // Taller box
+        // Calculate dynamic box height for centering
+        ctx.font = 'bold 50px Arial'; // Temp for measurement
+        const maxWidth = img.width - 100; // Padding
+        const lines = wrapText(ctx, message, maxWidth);
+        const boxHeight = 120 + (lines.length * 60); // Base for percentage + message lines
+        
+        // Centered overlay box
+        const boxY = (img.height / 2) - (boxHeight / 2);
+        ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
+        ctx.fillRect(20, boxY, img.width - 40, boxHeight); // Slight horizontal padding
         
         // Center text
         ctx.textAlign = 'center';
-        ctx.shadowColor = 'black'; // Shadow for "loud" effect
-        ctx.shadowBlur = 5;
+        ctx.shadowColor = 'black';
+        ctx.shadowBlur = 15;
         
         // Large percentage text
-        ctx.fillStyle = '#ff0000'; // Red for emphasis
-        ctx.font = 'bold 48px Arial';
-        ctx.fillText(`${Math.round(percent)}% Retarded`, img.width / 2, img.height - 130);
+        ctx.fillStyle = '#ff0000';
+        ctx.font = 'bold 80px Arial';
+        ctx.fillText(`${Math.round(percent)}% RETARDED`, img.width / 2, boxY + 90);
         
-        // Message text (split if too long for wrapping)
+        // Message text
         ctx.fillStyle = '#fff';
-        ctx.font = 'bold 32px Arial';
-        const maxWidth = img.width - 40; // Padding
-        const lines = wrapText(ctx, message, maxWidth);
+        ctx.font = 'bold 50px Arial';
         lines.forEach((line, index) => {
-            ctx.fillText(line, img.width / 2, img.height - 80 + (index * 40));
+            ctx.fillText(line, img.width / 2, boxY + 160 + (index * 60));
         });
     };
     img.src = currentImage;
