@@ -66,6 +66,16 @@ const specialMessages = [ // >100%: Over-the-top harsh mix (5 responses)
     "Retard max: Short bus supreme ruler 🚌👹"
 ];
 
+const zeroPercentResponses = [ // Exactly 0%: Positive, fun twists
+    "Zero retard: You're practically a genius... almost 😎",
+    "0% retard: Face and brain in perfect non-slow harmony 🧠✨"
+];
+
+const negativePercentResponses = [ // Negative %: Rare, over-smart jabs
+    "Negative retard: Too smart, it's suspicious 🕵️‍♂️",
+    "Anti-retard: Brain so sharp, it's cutting itself 🔪🧠"
+];
+
 const negativeMessage = "Not retarded... face had us fooled 😎";
 
 // Elements (unchanged)
@@ -164,7 +174,7 @@ scanBtn.addEventListener('click', () => {
     }, 3000);
 });
 
-// Generate Results (unchanged text sizes)
+// Generate Results (add rare negative % and 0% handling)
 function generateResults() {
     const ctx = resultCanvas.getContext('2d');
     const img = new Image();
@@ -173,15 +183,20 @@ function generateResults() {
         resultCanvas.height = img.height;
         ctx.drawImage(img, 0, 0);
         
-        const percentValue = Math.random() * 150;
+        let percentValue = Math.random() * 150;
+        // Rare negative % (5% chance for -50 to 0)
+        if (Math.random() < 0.05) {
+            percentValue = -Math.random() * 50;
+        }
         const percent = Math.round(percentValue);
+        
         let message;
-        if (percent <= 30) {
-            if (percent <= 20) {
-                message = negativeMessage;
-            } else {
-                message = mildResponses[Math.floor(Math.random() * mildResponses.length)];
-            }
+        if (percent < 0) {
+            message = negativePercentResponses[Math.floor(Math.random() * negativePercentResponses.length)];
+        } else if (percent === 0) {
+            message = zeroPercentResponses[Math.floor(Math.random() * zeroPercentResponses.length)];
+        } else if (percent <= 30) {
+            message = mildResponses[Math.floor(Math.random() * mildResponses.length)];
         } else if (percent <= 70) {
             message = mediumResponses[Math.floor(Math.random() * mediumResponses.length)];
         } else if (percent <= 100) {
@@ -210,42 +225,4 @@ function generateResults() {
         ctx.fillStyle = '#fff';
         ctx.font = 'bold 29px Arial';
         lines.forEach((line, index) => {
-            ctx.fillText(line, img.width / 2, boxY + 90 + (index * 32));
-        });
-    };
-    img.src = currentImage;
-}
-
-// Wrap Text (unchanged)
-function wrapText(ctx, text, maxWidth) {
-    const words = text.split(' ');
-    const lines = [];
-    let currentLine = words[0];
-    for (let i = 1; i < words.length; i++) {
-        const testLine = currentLine + ' ' + words[i];
-        const metrics = ctx.measureText(testLine);
-        if (metrics.width > maxWidth) {
-            lines.push(currentLine);
-            currentLine = words[i];
-        } else {
-            currentLine = testLine;
-        }
-    }
-    lines.push(currentLine);
-    return lines;
-}
-
-// Share Button (unchanged)
-shareBtn.addEventListener('click', () => {
-    const link = document.createElement('a');
-    link.download = 'retard-result.png';
-    link.href = resultCanvas.toDataURL('image/png');
-    link.click();
-});
-
-// Retry (unchanged)
-retryBtn.addEventListener('click', () => {
-    resultsSection.classList.add('hidden');
-    inputSection.classList.remove('hidden');
-    currentImage = null;
-});
+            ctx.fillText(line, img
