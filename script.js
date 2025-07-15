@@ -138,7 +138,7 @@ scanBtn.addEventListener('click', () => {
     }, 3000);
 });
 
-// Generate Results (50% smaller text sizes)
+// Generate Results (50% smaller text sizes from previous halved version, now 47px message, 47px measurement, 47px percentage? Wait, halved from last: percentage 47px, message 28.5~29px, but adjust to sensible)
 function generateResults() {
     const ctx = resultCanvas.getContext('2d');
     const img = new Image();
@@ -157,10 +157,10 @@ function generateResults() {
             message = responses[Math.floor(Math.random() * responses.length)];
         }
         
-        ctx.font = 'bold 57px Arial'; // Halved from 113px
+        ctx.font = 'bold 29px Arial'; // Halved from 57px
         const maxWidth = img.width - 100;
         const lines = wrapText(ctx, message, maxWidth);
-        const boxHeight = 135 + (lines.length * 64); // Halved from 270 and 128
+        const boxHeight = 68 + (lines.length * 32); // Halved from 135 and 64
         
         const boxY = (img.height / 2) - (boxHeight / 2);
         ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
@@ -171,13 +171,13 @@ function generateResults() {
         ctx.shadowBlur = 20;
         
         ctx.fillStyle = '#ff0000';
-        ctx.font = 'bold 94px Arial'; // Halved from 188px
-        ctx.fillText(`${Math.round(percent)}% RETARDED`, img.width / 2, boxY + 105); // Adjusted position halved
+        ctx.font = 'bold 47px Arial'; // Halved from 94px
+        ctx.fillText(`${Math.round(percent)}% RETARDED`, img.width / 2, boxY + 53); // Halved position
         
         ctx.fillStyle = '#fff';
-        ctx.font = 'bold 57px Arial';
+        ctx.font = 'bold 29px Arial';
         lines.forEach((line, index) => {
-            ctx.fillText(line, img.width / 2, boxY + 180 + (index * 64)); // Adjusted position halved
+            ctx.fillText(line, img.width / 2, boxY + 90 + (index * 32)); // Halved position
         });
     };
     img.src = currentImage;
