@@ -1,46 +1,46 @@
-// Updated roast-style responses (zingy one-liners, comedian roast feel)
+// Updated witty responses (crude, relaxed snippets with mental disability theme, emojis allowed)
 const responses = [
-    "You're so retarded, you tried to drown a fish.",
-    "Retard level: You think Taco Bell is a Mexican phone company.",
-    "You're retarded like a screen door on a submarine.",
-    "Congrats, retard—you're the reason shampoo has instructions.",
-    "You're so retarded, you tripped over a cordless phone.",
-    "Retard alert: You stare at orange juice because it says 'concentrate'.",
-    "You're retarded enough to get lost in an elevator.",
-    "Brain scan: Retard who brings a spoon to the Super Bowl.",
-    "You're so retarded, you think a quarterback is a refund.",
-    "Retard vibes: You climb over a glass wall to see what's on the other side.",
-    "You're retarded like putting a 'Do Not Walk on Grass' sign on a fence.",
-    "Scan results: Retard who takes a ruler to bed to see how long you sleep.",
-    "You're so retarded, you think Meow Mix is a CD for cats.",
-    "Retard-o-meter: You return a doughnut because it has a hole.",
-    "Confirmed retard: You think Earth Day is when the planet gets older.",
-    "You're retarded and ugly—like a two-for-one special on fails.",
-    "Brain not found: Retard who locks the car and leaves the keys inside.",
-    "You're retarded like arguing with a signpost.",
-    "Retard central: You bring your own pencil to a blood test.",
-    "Scan says: Retard who thinks manual labor is a Spanish musician.",
-    "You're so retarded, you think cheerios are doughnut seeds.",
-    "Retard unlocked: You take the 'The' out of 'psychotherapist'.",
-    "Holy retard: You think a solar eclipse is the sun quitting.",
-    "Retarded and proud? Like a peacock with no feathers.",
-    "Your retardation: Like bringing a fork to a soup convention.",
-    "Scan complete: Retard who waves at blind people.",
-    "You're retarded enough to need a map for the shower.",
-    "Retard royalty: Crown made of tin foil.",
-    "Confirmed clown: Retard who laughs at mirrors.",
-    "Retard critical: You think fast food is hard to catch."
+    "Yup, full-on window licker 🪟👅",
+    "Your head's just a decorative piece, retard 🎩😵",
+    "Classic helmet kid energy 🪖🤪",
+    "Retard mode: Drool champion 👑💧",
+    "So retarded, thoughts need training wheels 🚲🧠",
+    "You're the short bus VIP 🚌⭐",
+    "Mentally parked in disabled spot ♿🧠",
+    "Brain's on strike, retard picket line 🚧😑",
+    "Dummy alert: Crayon eater certified 🖍️🍴",
+    "Retarded like a puzzle missing half the pieces 🧩❓",
+    "Vibes: Special ed hall of famer 🏆🏫",
+    "Pure retard, extra slow sauce 🐌🍝",
+    "Your smarts? Permanent vacation mode 🏖️🧠",
+    "Retard meter maxed, helmet required 🪖📈",
+    "Confirmed: Mom's favorite oops baby 👶🙄",
+    "Retarded and goofy—like a lopsided grin 😬🧠",
+    "Brain not loading... retard error 404 🚫🧠",
+    "You're the retard who hugs trees 'cause they're family 🌳🤗",
+    "Retard central: Echoes in an empty skull 💀🗣️",
+    "Nitwit retard: Counts sheep to fall awake 🐑😴",
+    "So retarded, echoes in your head have echoes 🔊🧠",
+    "Retard upgrade: Now with bonus blank stares 👀😶",
+    "Holy retard: Praying for a brain transplant 🙏🧠",
+    "Retarded glow? More like dim bulb 💡😵",
+    "Contagious retard: Friends catching the slow 🐢👥",
+    "Overload: Retard circuits popping popcorn 🍿🧠",
+    "Retarded therapy? Start with velcro shoes 👟🔒",
+    "Royal retard: Crown of foam padding 👑🛡️",
+    "Clown retard: Red nose optional 🤡👃",
+    "Critical retard: Brain nap eternal 😴🧠"
 ];
 
 const specialMessages = [
-    "Omega retard: You're the punchline evolution forgot.",
-    "Over 100%: Retard so epic, even mirrors crack up.",
-    "Hyper-retard: Aliens visit just to point and laugh.",
-    "Ultimate retard: Peak moron—deserves a damn trophy.",
-    "Retard overload: Your brain's on strike, permanently."
+    "Omega retard: Window-licking legend 👅🪟🏆",
+    "Over 100%: Head decoration hall of fame 🎩😵⭐",
+    "Hyper-retard: Helmet hero eternal 🪖🦸‍♂️",
+    "Ultimate retard: Drool dynasty founder 💧👑",
+    "Retard max: Short bus overlord 🚌👹"
 ];
 
-const negativeMessage = "Not retarded... but give it time, genius.";
+const negativeMessage = "Not retarded... but close call 😏";
 
 // Elements (unchanged)
 const takeSelfieBtn = document.getElementById('take-selfie');
@@ -117,7 +117,7 @@ scanBtn.addEventListener('click', () => {
     }, 3000);
 });
 
-// Generate Results (50% larger text)
+// Generate Results (unchanged from previous size)
 function generateResults() {
     const ctx = resultCanvas.getContext('2d');
     const img = new Image();
@@ -136,10 +136,10 @@ function generateResults() {
             message = responses[Math.floor(Math.random() * responses.length)];
         }
         
-        ctx.font = 'bold 113px Arial'; // Temp for measurement (50% up from 75px)
+        ctx.font = 'bold 113px Arial'; // Measurement font
         const maxWidth = img.width - 100;
         const lines = wrapText(ctx, message, maxWidth);
-        const boxHeight = 270 + (lines.length * 128); // Adjusted for larger text (50% up)
+        const boxHeight = 270 + (lines.length * 128);
         
         const boxY = (img.height / 2) - (boxHeight / 2);
         ctx.fillStyle = 'rgba(0, 0, 0, 0.7)';
@@ -150,7 +150,7 @@ function generateResults() {
         ctx.shadowBlur = 20;
         
         ctx.fillStyle = '#ff0000';
-        ctx.font = 'bold 188px Arial'; // 50% up from 125px
+        ctx.font = 'bold 188px Arial';
         ctx.fillText(`${Math.round(percent)}% RETARDED`, img.width / 2, boxY + 210);
         
         ctx.fillStyle = '#fff';
